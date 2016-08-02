@@ -816,7 +816,7 @@ public class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 
                 //  Setting it's new frame
                 if(self._textFieldView?.customIQResizeLogic != nil){
-                    self._textFieldView?.customIQResizeLogic?(move:unwrappedController.view.frame.origin.y - newFrame.origin.y)
+                    self._textFieldView?.customIQResizeLogic?(move:unwrappedController.view.frame.origin.y - newFrame.origin.y, reset: false)
                 } else{
                     unwrappedController.view.frame = newFrame
                 }
@@ -1529,6 +1529,10 @@ public class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 
                 _rootViewController = nil
             }
+        }
+        
+        if(self._textFieldView?.customIQResizeLogic != nil){
+            self._textFieldView?.customIQResizeLogic!(move: 0, reset:true)
         }
         
         //Reset all values

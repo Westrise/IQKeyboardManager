@@ -42,7 +42,7 @@ private var kIQKeyboardDistanceFromTextField = "kIQKeyboardDistanceFromTextField
 
 private var kIQResizeLogic = "kIQResizeLogic"
 
-public typealias IQResizeLogic = (move: CGFloat) -> Void
+public typealias IQResizeLogic = (move: CGFloat, reset: Bool) -> Void
 
 /**
  UIView category for managing UITextField/UITextView
