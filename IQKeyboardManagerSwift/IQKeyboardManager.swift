@@ -1235,6 +1235,9 @@ public class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                         //  Setting adjusted rootViewRect
                         setRootViewFrame(rootViewRect)
                     }
+                } else if(self._textFieldView?.customIQResizeLogic != nil){
+                    rootViewRect.origin.y -= move
+                    setRootViewFrame(rootViewRect)
                 }
             }
         }
