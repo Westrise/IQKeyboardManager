@@ -815,8 +815,8 @@ public class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             UIView.animateWithDuration(_animationDuration, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState.union(_animationCurve), animations: { () -> Void in
                 
                 //  Setting it's new frame
-                if(_textFieldView.customIQResizeLogic != nil){
-                    _textFieldView.customIQResizeLogic(unwrappedController.view.frame.origin.y - newFrame.origin.y)
+                if(self._textFieldView?.customIQResizeLogic != nil){
+                    self._textFieldView?.customIQResizeLogic?(move:unwrappedController.view.frame.origin.y - newFrame.origin.y)
                 } else{
                     unwrappedController.view.frame = newFrame
                 }
@@ -828,9 +828,9 @@ public class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                     unwrappedController.view.setNeedsLayout()
                     unwrappedController.view.layoutIfNeeded()
                 }
- 
                 
-                }) { (animated:Bool) -> Void in}
+                
+            }) { (animated:Bool) -> Void in}
         } else {  //  If can't get rootViewController then printing warning to user.
             showLog("You must set UIWindow.rootViewController in your AppDelegate to work with IQKeyboardManager")
         }
