@@ -31,6 +31,10 @@ public let kIQUseDefaultKeyboardDistance = CGFloat.max
 
 private var kIQKeyboardDistanceFromTextField = "kIQKeyboardDistanceFromTextField"
 
+private var kIQResizeLogic = "kIQResizeLogic"
+
+typealias IQResizeLogic = (move: CGFloat) -> Void
+
 /**
 UIView category for managing UITextField/UITextView
 */
@@ -50,6 +54,21 @@ public extension UIView {
         }
         set(newValue) {
             objc_setAssociatedObject(self, &kIQKeyboardDistanceFromTextField, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    
+    public var customIQResizeLogic: IQResizeLogic? {
+        get {
+            
+            if let aValue = objc_getAssociatedObject(self, &kIQResizeLogic) as? IQResizeLogic {
+                return aValue
+            } else {
+                return nil
+            }
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &kIQResizeLogic, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
     }
 }

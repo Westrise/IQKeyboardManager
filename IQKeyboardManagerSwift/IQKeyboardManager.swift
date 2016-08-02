@@ -815,7 +815,11 @@ public class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
             UIView.animateWithDuration(_animationDuration, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState.union(_animationCurve), animations: { () -> Void in
                 
                 //  Setting it's new frame
-                unwrappedController.view.frame = newFrame
+                if(_textFieldView.customIQResizeLogic != nil){
+                    _textFieldView.customIQResizeLogic(unwrappedController.view.frame.origin.y - newFrame.origin.y)
+                } else{
+                    unwrappedController.view.frame = newFrame
+                }
                 self.showLog("Set \(controller?._IQDescription()) frame to : \(newFrame)")
                 
                 //Animating content if needed (Bug ID: #204)
