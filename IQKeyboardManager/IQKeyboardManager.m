@@ -524,7 +524,11 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
         __strong typeof(self) strongSelf = weakSelf;
 
         //  Setting it's new frame
-        [controller.view setFrame:frame];
+        if(self.textFieldView.customIQResizeLogic != nil){
+            self.textFieldView.customIQResizeLogic(controller.view.frame.origin.y - frame.origin.y, false);
+        } else{
+            [controller.view setFrame:frame];
+        }
         
         //Animating content if needed (Bug ID: #204)
         if (strongSelf.layoutIfNeededOnUpdate)
@@ -951,8 +955,12 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
                     [self showLog:@"Moving Downward"];
                     //  Setting adjusted rootViewRect
                     [self setRootViewFrame:rootViewRect];
+                } else if(self.textFieldView.customIQResizeLogic != nil){
+                    rootViewRect.origin.y -= move;
+                    [self setRootViewFrame:rootViewRect];
                 }
             }
+            
         }
     }
     
@@ -1183,6 +1191,10 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
 
         } completion:NULL];
         _rootViewController = nil;
+    }
+    
+    if(self.textFieldView.customIQResizeLogic != nil){
+        self.textFieldView.customIQResizeLogic(0, true);
     }
 
     //Reset all values

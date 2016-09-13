@@ -41,6 +41,21 @@
     return (keyboardDistanceFromTextField)?[keyboardDistanceFromTextField floatValue]:kIQUseDefaultKeyboardDistance;
 }
 
+
+
+
+
+-(void)setCustomIQResizeLogic:(IQResizeLogic)customIQResizeLogic{
+    
+    objc_setAssociatedObject(self, @selector(customIQResizeLogic), customIQResizeLogic, OBJC_ASSOCIATION_COPY);
+}
+
+-(IQResizeLogic)customIQResizeLogic
+{
+    IQResizeLogic customIQResizeLogic = objc_getAssociatedObject(self, @selector(customIQResizeLogic));    
+    return customIQResizeLogic;
+}
+
 @end
 
 ///------------------------------------
@@ -51,4 +66,6 @@
  Uses default keyboard distance for textField.
  */
 CGFloat const kIQUseDefaultKeyboardDistance = CGFLOAT_MAX;
+
+NSString* const kIQResizeLogic = @"kIQResizeLogic";
 

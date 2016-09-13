@@ -27,12 +27,15 @@
  UIView category for managing UITextField/UITextView
  */
 
+typedef void(^IQResizeLogic)(CGFloat move, BOOL reset);
+
 @interface UIView (Additions)
 
 /**
  To set customized distance from keyboard for textField/textView. Can't be less than zero
  */
 @property(nonatomic, assign) CGFloat keyboardDistanceFromTextField;
+@property(nonatomic, copy) IQResizeLogic customIQResizeLogic;
 
 @end
 
